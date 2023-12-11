@@ -26,7 +26,7 @@ public class BinarySearchTreeNode<E extends Comparable<E>> {
     }
     
     public BinarySearchTreeNode remove(E element) { // assume element is in array
-        if (data == element) { // matches up
+        if (data.compareTo(element) == 0) {
             if (left == null && right == null) { // leaf
                 return null;
             } else if (left != null && right == null) {
@@ -64,7 +64,7 @@ public class BinarySearchTreeNode<E extends Comparable<E>> {
         if (right == null) {
             return left;
         } else {
-            right = right.removeMin();
+            right = right.removeMax();
             return this;
         }
     }
@@ -145,16 +145,17 @@ public class BinarySearchTreeNode<E extends Comparable<E>> {
     }
     
     public String toString() {
-        String returned = "";
+        String toBeReturned = "";
         
         if (left != null) {
-            returned = left.toString() + ", ";
+            toBeReturned = left.toString() + ", ";
         } 
-        returned = returned + data.toString();
+        toBeReturned = toBeReturned + data.toString();
         if (right != null) {
-            returned = returned + ", " + right.toString();
+            toBeReturned = toBeReturned + ", " + right.toString();
         }
-        return returned;
+        
+        return toBeReturned;
     }
     
      /**     * Prints elements as stored in the tree

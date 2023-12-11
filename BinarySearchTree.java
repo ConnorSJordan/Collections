@@ -114,7 +114,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (isEmpty()) {
             return null;
         } else {
-            return remove(getMin());
+            root.removeMin();
+            return getMin();
         }
     }
     
@@ -127,7 +128,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (isEmpty()) {
             return null;
         } else {
-            return remove(getMax());
+            root.removeMax();
+            return getMax();
         }
     }
     

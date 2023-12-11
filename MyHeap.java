@@ -1,4 +1,4 @@
-
+import java.util.Arrays;
 /**
  * Creates a binary tree modeled after a heap
  *
@@ -13,7 +13,7 @@ public class MyHeap<E extends Comparable<E>> {
      * Constructor for objects of class MyHeap
      */
     public MyHeap() {
-        elemArray = (E[]) new Comparable[15];
+        elemArray = (E[]) new Comparable[2];
         lastNode = -1;
     }
 
@@ -23,8 +23,9 @@ public class MyHeap<E extends Comparable<E>> {
      * @param  element  the element to insert into the heap
      */
     public void add(E element) {
-        //check if full
-        if (isEmpty()) { // empty array
+        if(elemArray.length - 1 == lastNode) {
+            elemArray = Arrays.copyOf(elemArray, lastNode + 5);
+        } else if (isEmpty()) { // empty array
             elemArray[0] = element;
             lastNode++;
         } else {
@@ -72,6 +73,7 @@ public class MyHeap<E extends Comparable<E>> {
             int parentPos = 0;
             lastNode--;
             E temp = elemArray[parentPos];
+            
             while ((parentPos * 2) + 1 < lastNode && (parentPos * 2) + 2 < lastNode) {
                 temp = elemArray[parentPos];
                 if (elemArray[(parentPos * 2) + 1].compareTo(elemArray[(parentPos * 2) + 2]) < 0) {
