@@ -33,7 +33,7 @@ public class test {
         }
         bst.printTree(1);
         System.out.println(bst.getDepth());
-        bst.remove(3);
+        System.out.println(bst.remove(3));
         System.out.println("Divider");
         bst.printTree(1);
         System.out.println(bst.size());

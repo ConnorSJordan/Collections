@@ -60,9 +60,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
         } else if (search(element) == null) { // elem not in tree
             return null;
         } else {
-            root = root.remove(element);
             size--;
-            return element;
+            E toBeRemoved = root.search(element);
+            root = root.remove(element);
+            return toBeRemoved;
         }
     }
     
@@ -114,8 +115,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (isEmpty()) {
             return null;
         } else {
-            root.removeMin();
-            return getMin();
+            size--;
+            E toBeReturned = root.getMin();
+            root = root.removeMin();
+            return toBeReturned;
         }
     }
     
@@ -128,8 +131,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (isEmpty()) {
             return null;
         } else {
-            root.removeMax();
-            return getMax();
+            size--;
+            E toBeReturned = root.getMax();
+            root = root.removeMax();
+            return toBeReturned;
         }
     }
     
