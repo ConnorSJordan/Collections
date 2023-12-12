@@ -18,7 +18,13 @@ public class test {
         heap.add(6);
         heap.add(20);
         heap.add(0);
+        heap.printTree(2);
+        System.out.println(heap.size());
         heap.removeMin();
+        heap.removeMin();
+        heap.add(30);
+        heap.removeMin();
+        heap.add(0);
         heap.printTree(2);
         System.out.println(heap.size());
         System.out.println(heap.toString());

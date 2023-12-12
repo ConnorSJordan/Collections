@@ -13,7 +13,7 @@ public class MyHeap<E extends Comparable<E>> {
      * Constructor for objects of class MyHeap
      */
     public MyHeap() {
-        elemArray = (E[]) new Comparable[15];
+        elemArray = (E[]) new Comparable[4];
         lastNode = -1;
     }
 
