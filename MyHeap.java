@@ -13,7 +13,7 @@ public class MyHeap<E extends Comparable<E>> {
      * Constructor for objects of class MyHeap
      */
     public MyHeap() {
-        elemArray = (E[]) new Comparable[2];
+        elemArray = (E[]) new Comparable[15];
         lastNode = -1;
     }
 
@@ -25,22 +25,22 @@ public class MyHeap<E extends Comparable<E>> {
     public void add(E element) {
         if(elemArray.length - 1 == lastNode) {
             elemArray = Arrays.copyOf(elemArray, lastNode + 5);
-        } else if (isEmpty()) { // empty array
+        } else if (isEmpty()) {
             elemArray[0] = element;
             lastNode++;
         } else {
             elemArray[lastNode + 1] = element;
             lastNode++;
-            int childSpot = lastNode;
-            int parentSpot = (childSpot - 1)/2;
+            int childPosition = lastNode;
+            int parentPosition = (childPosition - 1)/2;
             
-            while(elemArray[childSpot].compareTo(elemArray[parentSpot]) < 0) {
-                E temp = elemArray[childSpot];
-                elemArray[childSpot] = elemArray[parentSpot];
-                elemArray[parentSpot] = temp;
+            while(elemArray[childPosition].compareTo(elemArray[parentPosition]) < 0) {
+                E temp = elemArray[childPosition];
+                elemArray[childPosition] = elemArray[parentPosition];
+                elemArray[parentPosition] = temp;
                 
-                childSpot = parentSpot;
-                parentSpot = (childSpot - 1) / 2;
+                childPosition = parentPosition;
+                parentPosition = (childPosition - 1) / 2;
             }
         }
     }
@@ -67,41 +67,42 @@ public class MyHeap<E extends Comparable<E>> {
         if(isEmpty()) {
             return null;
         } else {
+            int parentPosition = 0;
+            int left = (parentPosition * 2) + 1;
+            int right = (parentPosition * 2) + 2;
             E toBeReturned = getMin();
             elemArray[0] = elemArray[lastNode];
             elemArray[lastNode] = null;
-            int parentPosition = 0;
-            int leftIndex = (parentPosition * 2) + 1;
-            int rightIndex = (parentPosition * 2) + 2;
             lastNode--;
             E temp = elemArray[parentPosition];
             
-            while ((parentPosition * 2) + 1 < lastNode && rightIndex < lastNode) {
+            while ((parentPosition * 2) + 1 < lastNode && right < lastNode) {
                 temp = elemArray[parentPosition];
-                if (elemArray[leftIndex].compareTo(elemArray[rightIndex]) < 0) {
-                    elemArray[parentPosition] = elemArray[leftIndex];
-                    elemArray[leftIndex] = temp;
+                
+                if (elemArray[left].compareTo(elemArray[right]) < 0) {
+                    elemArray[parentPosition] = elemArray[left];
+                    elemArray[left] = temp;
                     parentPosition = parentPosition * 2 + 1;
                 } else {
-                    elemArray[parentPosition] = elemArray[rightIndex];
-                    elemArray[rightIndex] = temp;
+                    elemArray[parentPosition] = elemArray[right];
+                    elemArray[right] = temp;
                     parentPosition = parentPosition * 2 + 2;
                 }
             }
             
             if (elemArray[(parentPosition * 2) + 2] != null) {
-                if (elemArray[leftIndex].compareTo(elemArray[rightIndex]) < 0) {
-                    elemArray[parentPosition] = elemArray[leftIndex];
-                    elemArray[leftIndex] = temp;
+                if (elemArray[left].compareTo(elemArray[right]) < 0) {
+                    elemArray[parentPosition] = elemArray[left];
+                    elemArray[left] = temp;
                     parentPosition = parentPosition * 2 + 1;
                 } else {
-                    elemArray[parentPosition] = elemArray[rightIndex];
-                    elemArray[rightIndex] = temp;
+                    elemArray[parentPosition] = elemArray[right];
+                    elemArray[right] = temp;
                     parentPosition = parentPosition * 2 + 2;
                 }
-            } else if (elemArray[leftIndex] != null) {
-                elemArray[parentPosition] = elemArray[leftIndex];
-                elemArray[leftIndex] = temp;
+            } else if (elemArray[left] != null) {
+                elemArray[parentPosition] = elemArray[left];
+                elemArray[left] = temp;
                 parentPosition = parentPosition * 2 + 1;
             }
             

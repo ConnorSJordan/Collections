@@ -21,6 +21,7 @@ public class test {
         heap.removeMin();
         heap.printTree(2);
         System.out.println(heap.size());
+        System.out.println(heap.toString());
     }
     
     public static void testBST() {
