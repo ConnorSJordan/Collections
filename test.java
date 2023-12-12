@@ -22,6 +22,7 @@ public class test {
         heap.printTree(2);
         System.out.println(heap.size());
     }
+    
     public static void testBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
         System.out.println(bst.getDepth());

@@ -67,41 +67,45 @@ public class MyHeap<E extends Comparable<E>> {
         if(isEmpty()) {
             return null;
         } else {
-            E toReturn = getMin();
+            E toBeReturned = getMin();
             elemArray[0] = elemArray[lastNode];
             elemArray[lastNode] = null;
-            int parentPos = 0;
+            int parentPosition = 0;
+            int leftIndex = (parentPosition * 2) + 1;
+            int rightIndex = (parentPosition * 2) + 2;
             lastNode--;
-            E temp = elemArray[parentPos];
+            E temp = elemArray[parentPosition];
             
-            while ((parentPos * 2) + 1 < lastNode && (parentPos * 2) + 2 < lastNode) {
-                temp = elemArray[parentPos];
-                if (elemArray[(parentPos * 2) + 1].compareTo(elemArray[(parentPos * 2) + 2]) < 0) {
-                    elemArray[parentPos] = elemArray[(parentPos * 2) + 1];
-                    elemArray[(parentPos * 2) + 1] = temp;
-                    parentPos = (parentPos * 2) + 1;
+            while ((parentPosition * 2) + 1 < lastNode && rightIndex < lastNode) {
+                temp = elemArray[parentPosition];
+                if (elemArray[leftIndex].compareTo(elemArray[rightIndex]) < 0) {
+                    elemArray[parentPosition] = elemArray[leftIndex];
+                    elemArray[leftIndex] = temp;
+                    parentPosition = parentPosition * 2 + 1;
                 } else {
-                    elemArray[parentPos] = elemArray[(parentPos * 2) + 2];
-                    elemArray[(parentPos * 2) + 2] = temp;
-                    parentPos = (parentPos * 2) + 2;
+                    elemArray[parentPosition] = elemArray[rightIndex];
+                    elemArray[rightIndex] = temp;
+                    parentPosition = parentPosition * 2 + 2;
                 }
             }
             
-            if (elemArray[(parentPos * 2) + 2] != null) {
-                if (elemArray[(parentPos * 2) + 1].compareTo(elemArray[(parentPos * 2) + 2]) < 0) {
-                    elemArray[parentPos] = elemArray[(parentPos * 2) + 1];
-                    elemArray[(parentPos * 2) + 1] = temp;
-                    parentPos = (parentPos * 2) + 1;
+            if (elemArray[(parentPosition * 2) + 2] != null) {
+                if (elemArray[leftIndex].compareTo(elemArray[rightIndex]) < 0) {
+                    elemArray[parentPosition] = elemArray[leftIndex];
+                    elemArray[leftIndex] = temp;
+                    parentPosition = parentPosition * 2 + 1;
                 } else {
-                    elemArray[parentPos] = elemArray[(parentPos * 2) + 2];
-                    elemArray[(parentPos * 2) + 2] = temp;
-                    parentPos = (parentPos * 2) + 2;
+                    elemArray[parentPosition] = elemArray[rightIndex];
+                    elemArray[rightIndex] = temp;
+                    parentPosition = parentPosition * 2 + 2;
                 }
-            } else if (elemArray[(parentPos * 2) + 1] != null) {
-                
+            } else if (elemArray[leftIndex] != null) {
+                elemArray[parentPosition] = elemArray[leftIndex];
+                elemArray[leftIndex] = temp;
+                parentPosition = parentPosition * 2 + 1;
             }
             
-            return toReturn;
+            return toBeReturned;
         }    
     }
     
@@ -124,7 +128,7 @@ public class MyHeap<E extends Comparable<E>> {
     }
     
     public String toString() {
-        return "";
+        return Arrays.toString(elemArray);
     }
     
     /**
