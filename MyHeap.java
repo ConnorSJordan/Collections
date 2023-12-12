@@ -23,7 +23,7 @@ public class MyHeap<E extends Comparable<E>> {
      * @param  element  the element to insert into the heap
      */
     public void add(E element) {
-        if(elemArray.length - 1 == lastNode) {
+        if(elemArray.length - 1 >= lastNode) {
             elemArray = Arrays.copyOf(elemArray, lastNode + 5);
         }
         if (isEmpty()) {
