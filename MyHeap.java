@@ -25,7 +25,8 @@ public class MyHeap<E extends Comparable<E>> {
     public void add(E element) {
         if(elemArray.length - 1 == lastNode) {
             elemArray = Arrays.copyOf(elemArray, lastNode + 5);
-        } else if (isEmpty()) {
+        }
+        if (isEmpty()) {
             elemArray[0] = element;
             lastNode++;
         } else {
